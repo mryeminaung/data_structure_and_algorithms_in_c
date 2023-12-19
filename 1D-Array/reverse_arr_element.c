@@ -7,8 +7,6 @@ int main()
     int arr[SIZE];
     int num = 0, temp = 0;
 
-    // sizeof(arr) / sizeof(int)
-
     printf("Enter number of elements : ");
     scanf("%d", &num);
 
@@ -31,18 +29,14 @@ int main()
             printf("]\n");
     }
 
-    for (int i = 0, j = num - 1; i < num, j >= 0; i++, j--)
+    int j = num - 1;
+
+    for (int i = 0; i < (num / 2); i++)
     {
-        if (arr[i] == arr[j])
-        {
-            break;
-        }
-        else
-        {
-            temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-        }
+        temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+        j--;
     }
 
     printf("\nReversed array : ");
