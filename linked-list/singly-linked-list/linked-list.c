@@ -5,11 +5,11 @@
 void main_menu();
 void create_list();
 void display_list();
-void print_number_of_node();
+void count_node();
 void add_start();
 void add_end();
-void add_before();
-void add_after();
+void insert_before();
+void insert_after();
 
 struct Node
 {
@@ -41,7 +41,7 @@ int main()
             display_list();
             break;
         case 3:
-            print_number_of_node();
+            count_node();
             break;
         case 4:
             add_start();
@@ -50,10 +50,10 @@ int main()
             add_end();
             break;
         case 6:
-            add_before();
+            insert_before();
             break;
         case 7:
-            add_after();
+            insert_after();
             break;
         case 8:
             printf("\nHappy Coding!\n\n");
@@ -126,12 +126,20 @@ void display_list()
         printf("%d\t", ptr->data);
         ptr = ptr->next;
     }
-
-    printf("NULL\n\n");
 }
 
-void print_number_of_node()
+void count_node()
 {
+    int count = 0;
+    struct Node *ptr = head;
+
+    while (ptr != NULL)
+    {
+        count += 1;
+        ptr = ptr->next;
+    }
+
+    printf("\nTotal number of nodes : %d\n\n", count);
 }
 
 void add_start()
@@ -142,10 +150,10 @@ void add_end()
 {
 }
 
-void add_before()
+void insert_before()
 {
 }
 
-void add_after()
+void insert_after()
 {
 }
