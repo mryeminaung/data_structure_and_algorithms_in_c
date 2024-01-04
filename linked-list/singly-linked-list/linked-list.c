@@ -6,10 +6,12 @@ void main_menu();
 void create_list();
 void display_list();
 void count_node();
+void append_list();
 void add_start();
 void add_end();
 void insert_before();
 void insert_after();
+void searching_node();
 
 struct Node
 {
@@ -30,7 +32,7 @@ int main()
         {
             printf("\nEnter your option : ");
             scanf("%d", &option);
-        } while (!(option >= 1 && option <= 9));
+        } while (!(option >= 1 && option <= 10));
 
         switch (option)
         {
@@ -41,21 +43,27 @@ int main()
             display_list();
             break;
         case 3:
-            count_node();
+            append_list();
             break;
         case 4:
-            add_start();
+            count_node();
             break;
         case 5:
-            add_end();
+            add_start();
             break;
         case 6:
-            insert_before();
+            add_end();
             break;
         case 7:
-            insert_after();
+            insert_before();
             break;
         case 8:
+            insert_after();
+            break;
+        case 9:
+            searching_node();
+            break;
+        case 10:
             printf("\nHappy Coding!\n\n");
             exit(0);
             break;
@@ -70,14 +78,16 @@ int main()
 void main_menu()
 {
     printf("\n***** MAIN MENU *****\n");
-    printf("1: Create a list\n");
+    printf("1: Create a new list\n");
     printf("2: Display the list\n");
-    printf("3: Print the number of node in the linked list\n");
-    printf("4: Add a node at the beginning\n");
-    printf("5: Add a node at the end\n");
-    printf("6: Add a node before a given node\n");
-    printf("7: Add a node after a given node\n");
-    printf("8: EXIT\n");
+    printf("3: Append to the previous list\n");
+    printf("4: Number of nodes\n");
+    printf("5: Add a node at the beginning\n");
+    printf("6: Add a node at the end\n");
+    printf("7: Add a node before a given node\n");
+    printf("8: Add a node after a given node\n");
+    printf("9: Searching a node\n");
+    printf("10: EXIT\n");
 }
 
 void create_list()
@@ -118,36 +128,104 @@ void create_list()
 
 void display_list()
 {
-    struct Node *ptr;
-    ptr = head;
-
-    while (ptr != NULL)
+    if (head == NULL)
     {
-        printf("%d\t", ptr->data);
-        ptr = ptr->next;
+        printf("\n\nLinked List is empty!\n\n");
+        return;
+    }
+    else
+    {
+        struct Node *ptr = head;
+        while (ptr != NULL)
+        {
+            printf("%d\t", ptr->data);
+            ptr = ptr->next;
+        }
+    }
+}
+
+void append_list()
+{
+    if (head == NULL)
+    {
+        printf("\n\nLinked List is empty!\n\n");
+        return;
+    }
+    else
+    {
     }
 }
 
 void count_node()
 {
-    int count = 0;
-    struct Node *ptr = head;
-
-    while (ptr != NULL)
+    if (head == NULL)
     {
-        count += 1;
-        ptr = ptr->next;
+        printf("\n\nLinked List is empty!\n\n");
+        return;
     }
+    else
+    {
+        int count = 0;
+        struct Node *ptr = head;
 
-    printf("\nTotal number of nodes : %d\n\n", count);
+        while (ptr != NULL)
+        {
+            count += 1;
+            ptr = ptr->next;
+        }
+
+        printf("\nTotal number of nodes : %d\n\n", count);
+    }
 }
 
 void add_start()
 {
+    if (head == NULL)
+    {
+        printf("\n\nLinked List is empty!\n\n");
+        return;
+    }
+    else
+    {
+        struct Node *newNode;
+        int num;
+
+        printf("\nEnter the data : ");
+        scanf("%d", &num);
+
+        newNode = (struct Node *)malloc(sizeof(struct Node));
+        newNode->data = num;
+        newNode->next = head;
+        head = newNode;
+    }
 }
 
 void add_end()
 {
+    if (head == NULL)
+    {
+        printf("\n\nLinked List is empty!\n\n");
+        return;
+    }
+    else
+    {
+        struct Node *ptr, *newNode;
+        int num;
+
+        printf("\nEnter the data : ");
+        scanf("%d", &num);
+
+        newNode = (struct Node *)malloc(sizeof(struct Node));
+        newNode->data = num;
+        newNode->next = NULL;
+
+        ptr = head;
+        while (ptr->next != NULL)
+        {
+            ptr = ptr->next;
+        }
+        ptr->next = newNode;
+    }
 }
 
 void insert_before()
@@ -156,4 +234,16 @@ void insert_before()
 
 void insert_after()
 {
+}
+
+void searching_node()
+{
+    if (head == NULL)
+    {
+        printf("\n\nLinked List is empty!\n\n");
+        return;
+    }
+    else
+    {
+    }
 }
