@@ -136,11 +136,13 @@ void display_list()
     else
     {
         struct Node *ptr = head;
+        printf("\n\nLinked List : ");
         while (ptr != NULL)
         {
-            printf("%d\t", ptr->data);
+            printf("\t%d", ptr->data);
             ptr = ptr->next;
         }
+        printf("\n\n");
     }
 }
 
@@ -245,5 +247,22 @@ void searching_node()
     }
     else
     {
+        struct Node *ptr = head;
+        int num;
+
+        printf("\nEnter the data : ");
+        scanf("%d", &num);
+
+        while (ptr != NULL)
+        {
+            if (ptr->data == num)
+            {
+                printf("\n\nFound\n\n");
+                return;
+            }
+            else
+                ptr = ptr->next;
+        }
+        printf("\n\nNot Found\n\n");
     }
 }
