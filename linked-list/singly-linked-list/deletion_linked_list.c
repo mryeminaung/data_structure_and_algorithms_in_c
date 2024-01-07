@@ -192,4 +192,25 @@ void delete_after()
 
 void delete_list()
 {
+    if (head == NULL)
+    {
+        printf("\nLinked List is empty!\n");
+        return;
+    }
+    else
+    {
+        struct node *ptr, *preptr;
+        ptr = head;
+        preptr = ptr;
+
+        while (ptr != NULL)
+        {
+            preptr = ptr;
+            head = preptr;
+            ptr = ptr->next;
+            free(preptr);
+        }
+        head = NULL;
+        printf("\nLinked List is deleted!\n");
+    }
 }
