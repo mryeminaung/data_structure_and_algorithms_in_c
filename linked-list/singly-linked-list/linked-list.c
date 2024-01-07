@@ -232,6 +232,36 @@ void add_end()
 
 void insert_before()
 {
+    if (head == NULL)
+    {
+        printf("\n\nLinked List is empty!\n\n");
+        return;
+    }
+    else
+    {
+        struct Node *ptr, *preptr, *newNode;
+        int node, num;
+
+        printf("\nEnter a node to insert before it : ");
+        scanf("%d", &node);
+        printf("\nEnter the data : ");
+        scanf("%d", &num);
+
+        ptr = head;
+        preptr = ptr;
+
+        newNode = (struct Node *)malloc(sizeof(struct Node));
+        newNode->data = num;
+
+        while (ptr->data != node)
+        {
+            preptr = ptr;
+            ptr = ptr->next;
+        }
+
+        newNode->next = ptr;
+        preptr->next = newNode;
+    }
 }
 
 void insert_after()
