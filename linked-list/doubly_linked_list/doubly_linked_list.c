@@ -16,6 +16,9 @@ void menu();
 void create_list();
 void display_list();
 void reverse_list();
+void delete_start();
+void delete_end();
+void delete_entire_list();
 
 int main()
 {
@@ -40,7 +43,16 @@ int main()
         case 3:
             reverse_list();
             break;
-        case 10:
+        case 4:
+            delete_start();
+            break;
+        case 5:
+            delete_end();
+            break;
+        case 6:
+            delete_entire_list();
+            break;
+        case 7:
             printf("\nHappy Coding!\n\n");
             exit(0);
         default:
@@ -56,6 +68,10 @@ void menu()
     printf("1. Create a list\n");
     printf("2. Display the list\n");
     printf("3. Display the list in reverse order\n");
+    printf("4. Delete a node at start\n");
+    printf("5. Delete a node at end\n");
+    printf("6. Delete the entire list\n");
+    printf("7. EXIT\n");
 }
 
 void create_list()
@@ -76,7 +92,10 @@ void create_list()
         newNode->next = NULL;
 
         if (head == NULL)
+        {
             head = newNode;
+            tail = newNode;
+        }
         else
         {
             struct node *ptr;
@@ -124,15 +143,94 @@ void reverse_list()
     }
     else
     {
-        struct node *ptr;
-        ptr = tail;
+        if (head->next == NULL)
+        {
+            printf("\nReversed List : %d\n", head->data);
+        }
+        else
+        {
+            struct node *ptr;
+            ptr = tail;
 
-        printf("\nReversed List : ");
+            printf("\nReversed List : ");
+            while (ptr != NULL)
+            {
+                printf("%d\t", ptr->data);
+                ptr = ptr->pre;
+            }
+            printf("\n");
+        }
+    }
+}
+
+void delete_start()
+{
+    if (head == NULL)
+    {
+        printf("\nLinked List is empty!\n");
+        return;
+    }
+    else
+    {
+        struct node *ptr;
+        ptr = head;
+
+        head->pre = NULL;
+        head = ptr->next;
+        free(ptr);
+    }
+}
+
+void delete_end()
+{
+    if (head == NULL)
+    {
+        printf("\nLinked List is empty!\n");
+        return;
+    }
+    else
+    {
+        struct node *ptr, *newNode;
+        ptr = head;
+
+        if (ptr->next == NULL)
+        {
+            free(ptr);
+            head = NULL;
+        }
+        else
+        {
+            while (ptr->next != NULL)
+            {
+                ptr = ptr->next;
+            }
+            tail = ptr->pre;
+            tail->next = NULL;
+            free(ptr);
+        }
+    }
+}
+
+void delete_entire_list()
+{
+    if (head == NULL)
+    {
+        printf("\nLinked List is empty!\n");
+        return;
+    }
+    else
+    {
+        struct node *ptr;
+        ptr = head;
+
         while (ptr != NULL)
         {
-            printf("%d\t", ptr->data);
-            ptr = ptr->pre;
+            head = ptr->pre;
+            ptr = ptr->next;
+            free(ptr);
         }
-        printf("\n");
+        head = NULL;
+        tail = NULL;
     }
+    printf("\nEntire list is deleted!\n");
 }
