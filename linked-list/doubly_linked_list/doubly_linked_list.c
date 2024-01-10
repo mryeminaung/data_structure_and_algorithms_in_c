@@ -175,8 +175,8 @@ void delete_start()
         struct node *ptr;
         ptr = head;
 
-        head->pre = NULL;
         head = ptr->next;
+        head->pre = NULL;
         free(ptr);
     }
 }
