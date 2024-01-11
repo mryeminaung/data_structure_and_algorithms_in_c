@@ -19,6 +19,8 @@ void create_list();
 void display_list();
 void reverse_list();
 void searching_node();
+void add_start();
+void add_end();
 void delete_start();
 void delete_end();
 void delete_entire_list();
@@ -52,33 +54,39 @@ int main()
             searching_node();
             break;
         case 5:
-            delete_start();
+            add_start();
             break;
         case 6:
-            delete_end();
+            add_end();
             break;
         case 7:
-            delete_entire_list();
+            delete_start();
             break;
         case 8:
+            delete_end();
+            break;
+        case 9:
+            delete_entire_list();
+            break;
+        case 10:
             printf("\nHappy Coding!\n\n");
             exit(0);
         default:
             printf("\nInvalid Option!\n");
         }
-        getchar();
+        // getchar();
 
-        do
-        {
-            printf("\nPress \'ENTER\' to continue the program...");
-            ans = getchar();
-            if (ans == '\n')
-                break;
-            getchar();
-        } while (!(ans == '\n'));
-        ans = ' ';
+        // do
+        // {
+        //     printf("\nPress \'ENTER\' to continue the program...");
+        //     ans = getchar();
+        //     if (ans == '\n')
+        //         break;
+        //     getchar();
+        // } while (!(ans == '\n'));
+        // ans = ' ';
 
-        system("clear");
+        // system("clear");
     }
     return 0;
 }
@@ -90,10 +98,12 @@ void menu()
     printf("2. Display the list\n");
     printf("3. Display the list in reverse order\n");
     printf("4. Searching a given node\n");
-    printf("5. Delete a node at start\n");
-    printf("6. Delete a node at end\n");
-    printf("7. Delete the entire list\n");
-    printf("8. EXIT\n");
+    printf("5. Add a node at the beginning\n");
+    printf("6. Add a node at the end\n");
+    printf("7. Delete a node from the beginning\n");
+    printf("8. Delete a node from the end\n");
+    printf("9. Delete the entire list\n");
+    printf("10. EXIT\n");
 }
 
 void create_list()
@@ -211,6 +221,58 @@ void searching_node()
             ptr = ptr->next;
         }
         printf("\nNot Found\n");
+    }
+}
+
+void add_start()
+{
+    if (head == NULL)
+    {
+        printf("\nLinked List is empty!\n");
+        return;
+    }
+    else
+    {
+        struct node *ptr, *newNode;
+        ptr = head;
+        int num;
+
+        printf("Enter the data : ");
+        scanf("%d", &num);
+
+        newNode = (struct node *)malloc(sizeof(struct node));
+
+        
+        newNode->data = num;
+        newNode->next = ptr;
+        head = newNode;
+        head->pre = NULL;
+    }
+}
+
+void add_end()
+{
+    if (head == NULL)
+    {
+        printf("\nLinked List is empty!\n");
+        return;
+    }
+    else
+    {
+        struct node *ptr, *newNode;
+        ptr = tail;
+        int num = 0;
+
+        newNode = (struct node *)malloc(sizeof(struct node));
+
+        printf("\nEnter the data : ");
+        scanf("%d", &num);
+
+        ptr->next = newNode;
+        newNode->pre = ptr;
+        newNode->data = num;
+        newNode->next = NULL;
+        tail = newNode;
     }
 }
 
