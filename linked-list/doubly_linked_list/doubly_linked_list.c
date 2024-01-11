@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <unistd.h>
+#include <ctype.h>
 
 struct node
 {
@@ -16,6 +18,7 @@ void menu();
 void create_list();
 void display_list();
 void reverse_list();
+void searching_node();
 void delete_start();
 void delete_end();
 void delete_entire_list();
@@ -26,6 +29,8 @@ int main()
     {
         menu();
         int option = 0;
+        char ans;
+
         do
         {
             printf("\nEnter your option : ");
@@ -44,20 +49,36 @@ int main()
             reverse_list();
             break;
         case 4:
-            delete_start();
+            searching_node();
             break;
         case 5:
-            delete_end();
+            delete_start();
             break;
         case 6:
-            delete_entire_list();
+            delete_end();
             break;
         case 7:
+            delete_entire_list();
+            break;
+        case 8:
             printf("\nHappy Coding!\n\n");
             exit(0);
         default:
             printf("\nInvalid Option!\n");
         }
+        getchar();
+
+        do
+        {
+            printf("\nPress \'ENTER\' to continue the program...");
+            ans = getchar();
+            if (ans == '\n')
+                break;
+            getchar();
+        } while (!(ans == '\n'));
+        ans = ' ';
+
+        system("clear");
     }
     return 0;
 }
@@ -68,10 +89,11 @@ void menu()
     printf("1. Create a list\n");
     printf("2. Display the list\n");
     printf("3. Display the list in reverse order\n");
-    printf("4. Delete a node at start\n");
-    printf("5. Delete a node at end\n");
-    printf("6. Delete the entire list\n");
-    printf("7. EXIT\n");
+    printf("4. Searching a given node\n");
+    printf("5. Delete a node at start\n");
+    printf("6. Delete a node at end\n");
+    printf("7. Delete the entire list\n");
+    printf("8. EXIT\n");
 }
 
 void create_list()
@@ -160,6 +182,35 @@ void reverse_list()
             }
             printf("\n");
         }
+    }
+}
+
+void searching_node()
+{
+    if (head == NULL)
+    {
+        printf("\nLinked List is empty!\n");
+        return;
+    }
+    else
+    {
+        struct node *ptr;
+        ptr = head;
+        int node = 0;
+
+        printf("\nEnter the element : ");
+        scanf("%d", &node);
+
+        while (ptr != NULL)
+        {
+            if (ptr->data == node)
+            {
+                printf("\nFound\n");
+                return;
+            }
+            ptr = ptr->next;
+        }
+        printf("\nNot Found\n");
     }
 }
 
