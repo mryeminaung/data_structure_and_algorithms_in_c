@@ -21,6 +21,8 @@ void reverse_list();
 void searching_node();
 void add_start();
 void add_end();
+void insert_before();
+void insert_after();
 void delete_start();
 void delete_end();
 void delete_entire_list();
@@ -37,7 +39,7 @@ int main()
         {
             printf("\nEnter your option : ");
             scanf("%d", &option);
-        } while (!(option >= 1 && option <= 10));
+        } while (!(option >= 1 && option <= 12));
 
         switch (option)
         {
@@ -60,15 +62,21 @@ int main()
             add_end();
             break;
         case 7:
-            delete_start();
+            insert_before();
             break;
         case 8:
-            delete_end();
+            insert_after();
             break;
         case 9:
-            delete_entire_list();
+            delete_start();
             break;
         case 10:
+            delete_end();
+            break;
+        case 11:
+            delete_entire_list();
+            break;
+        case 12:
             printf("\nHappy Coding!\n\n");
             exit(0);
         default:
@@ -100,10 +108,12 @@ void menu()
     printf("4. Searching a given node\n");
     printf("5. Add a node at the beginning\n");
     printf("6. Add a node at the end\n");
-    printf("7. Delete a node from the beginning\n");
-    printf("8. Delete a node from the end\n");
-    printf("9. Delete the entire list\n");
-    printf("10. EXIT\n");
+    printf("7. Add a node before a given node\n");
+    printf("8. Add a node after a given node\n");
+    printf("9. Delete a node from the beginning\n");
+    printf("10. Delete a node from the end\n");
+    printf("11. Delete the entire list\n");
+    printf("12. EXIT\n");
 }
 
 void create_list()
@@ -273,6 +283,72 @@ void add_end()
         newNode->data = num;
         newNode->next = NULL;
         tail = newNode;
+    }
+}
+
+void insert_before()
+{
+    if (head == NULL)
+    {
+        printf("\nLinked list is empty!\n");
+        return;
+    }
+    else
+    {
+        struct node *ptr, *newNode;
+        ptr = head;
+        int node, num;
+
+        printf("\nEnter a node to insert before it : ");
+        scanf("%d", &node);
+        printf("\nEnter the data : ");
+        scanf("%d", &num);
+
+        newNode = (struct node *)malloc(sizeof(struct node));
+
+        while (ptr->data != node)
+        {
+            ptr = ptr->next;
+        }
+
+        newNode->data = num;
+        newNode->next = ptr;
+        newNode->pre = ptr->pre;
+        ptr->pre->next = newNode;
+        ptr->pre = newNode;
+    }
+}
+
+void insert_after()
+{
+    if (head == NULL)
+    {
+        printf("\nLinked list is empty!\n");
+        return;
+    }
+    else
+    {
+        struct node *ptr, *newNode;
+        ptr = head;
+        int node, num;
+
+        printf("\nEnter a node to insert after it : ");
+        scanf("%d", &node);
+        printf("\nEnter the data : ");
+        scanf("%d", &num);
+
+        newNode = (struct node *)malloc(sizeof(struct node));
+
+        while (ptr->data != node)
+        {
+            ptr = ptr->next;
+        }
+
+        newNode->data = num;
+        newNode->next = ptr->next;
+        newNode->pre = ptr;
+        ptr->next = newNode;
+        newNode->next->pre = newNode;
     }
 }
 
