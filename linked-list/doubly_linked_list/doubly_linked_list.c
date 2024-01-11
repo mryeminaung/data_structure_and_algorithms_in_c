@@ -112,7 +112,7 @@ void create_list()
     printf("\nEnter -1 to end\n");
     while (true)
     {
-        printf("Enter the data : ");
+        printf("\nEnter the data : ");
         scanf("%d", &num);
 
         if (num == -1)
@@ -237,16 +237,16 @@ void add_start()
         ptr = head;
         int num;
 
-        printf("Enter the data : ");
+        printf("\nEnter the data : ");
         scanf("%d", &num);
 
         newNode = (struct node *)malloc(sizeof(struct node));
 
-        
+        newNode->pre = NULL;
         newNode->data = num;
+        ptr->pre = newNode;
         newNode->next = ptr;
         head = newNode;
-        head->pre = NULL;
     }
 }
 
