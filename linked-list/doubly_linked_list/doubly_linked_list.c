@@ -39,7 +39,7 @@ int main()
         {
             printf("\nEnter your option : ");
             scanf("%d", &option);
-        } while (!(option >= 1 && option <= 12));
+        } while (!(option >= 1 && option <= 14));
 
         switch (option)
         {
@@ -74,9 +74,18 @@ int main()
             delete_end();
             break;
         case 11:
-            delete_entire_list();
+            delete_before();
             break;
         case 12:
+            delete_after();
+            break;
+        case 13:
+            delete_given_node();
+            break;
+        case 14:
+            delete_entire_list();
+            break;
+        case 15:
             printf("\nHappy Coding!\n\n");
             exit(0);
         default:
@@ -112,8 +121,11 @@ void menu()
     printf("8. Add a node after a given node\n");
     printf("9. Delete a node from the beginning\n");
     printf("10. Delete a node from the end\n");
-    printf("11. Delete the entire list\n");
-    printf("12. EXIT\n");
+    printf("11. Delete a node before a given node\n");
+    printf("12. Delete a node after a given node\n");
+    printf("13. Delete a given node\n");
+    printf("14. Delete the entire list\n");
+    printf("15. EXIT\n");
 }
 
 void create_list()

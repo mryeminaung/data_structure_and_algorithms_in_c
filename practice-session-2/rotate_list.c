@@ -15,6 +15,7 @@ struct node
 };
 
 struct node *head = NULL;
+int node_count = 0;
 
 int main()
 {
@@ -112,6 +113,7 @@ void display_list()
             if (ptr->next != NULL)
                 printf("  ->");
             ptr = ptr->next;
+            node_count += 1;
         }
         printf("\n");
     }
@@ -126,34 +128,21 @@ void rotate_list()
     }
     else
     {
-        struct node *ptr;
-        ptr = head;
         int rotation = 0;
 
         printf("\nEnter Rotate Times : ");
         scanf("%d", &rotation);
 
         printf("\nBefore Rotation : ");
-        while (ptr != NULL)
+        display_list();
+
+        printf("\nAfter Rotation %d times : ", rotation);
+        if (rotation == node_count)
+            display_list();
+        else
         {
-            printf("  %d", ptr->data);
-            if (ptr->next != NULL)
-                printf("  ->");
-            ptr = ptr->next;
-        }
-
-        rotate(rotation);
-
-        struct node *ptr2;
-        ptr2 = head;
-
-        printf("\n\nAfter Rotation %d times : ", rotation);
-        while (ptr2 != NULL)
-        {
-            printf("  %d", ptr2->data);
-            if (ptr2->next != NULL)
-                printf("  ->");
-            ptr2 = ptr2->next;
+            rotate(rotation);
+            display_list();
         }
     }
 }
@@ -167,14 +156,11 @@ void rotate(int rotation)
     }
     else
     {
-        int count = 0;
-
-        while (count < rotation)
+        for (int count = 0; count < rotation; count++)
         {
             struct node *ptr, *preptr;
             ptr = head;
             preptr = ptr;
-
             while (ptr->next != NULL)
             {
                 preptr = ptr;
@@ -183,8 +169,6 @@ void rotate(int rotation)
             preptr->next = NULL;
             ptr->next = head;
             head = ptr;
-
-            count += 1;
         }
     }
 }
