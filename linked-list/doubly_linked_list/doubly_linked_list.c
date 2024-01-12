@@ -25,6 +25,9 @@ void insert_before();
 void insert_after();
 void delete_start();
 void delete_end();
+void delete_before();
+void delete_after();
+void delete_given_node();
 void delete_entire_list();
 
 int main()
@@ -39,7 +42,7 @@ int main()
         {
             printf("\nEnter your option : ");
             scanf("%d", &option);
-        } while (!(option >= 1 && option <= 14));
+        } while (!(option >= 1 && option <= 15));
 
         switch (option)
         {
@@ -376,9 +379,17 @@ void delete_start()
         struct node *ptr;
         ptr = head;
 
-        head = ptr->next;
-        head->pre = NULL;
-        free(ptr);
+        if (head->next == NULL)
+        {
+            head = NULL;
+            tail = NULL;
+        }
+        else
+        {
+            head = ptr->next;
+            head->pre = NULL;
+            free(ptr);
+        }
     }
 }
 
@@ -408,6 +419,78 @@ void delete_end()
             tail = ptr->pre;
             tail->next = NULL;
             free(ptr);
+        }
+    }
+}
+
+void delete_before()
+{
+    if (head == NULL)
+    {
+        printf("\nLinked List is empty!\n");
+        return;
+    }
+    else
+    {
+        struct node *ptr, *temp;
+        ptr = head;
+        int node;
+
+        printf("\nEnter a node to delete before it : ");
+        scanf("%d", &node);
+
+        while (ptr->data != node)
+        {
+            ptr = ptr->next;
+        }
+
+        if (ptr->data == head->data)
+        {
+            printf("\nThere is no node to delete before a given node!!!\n");
+        }
+        else if (ptr->pre->data == head->data)
+            delete_start();
+        else
+        {
+            temp = ptr->pre;
+            ptr->pre = temp->pre;
+            temp->pre->next = ptr;
+            free(temp);
+        }
+    }
+}
+
+void delete_after()
+{
+    if (head == NULL)
+    {
+        printf("\nLinked List is empty!\n");
+        return;
+    }
+    else
+    {
+        struct node *ptr, *temp;
+        ptr = head;
+        int node;
+
+        printf("\nEnter a node to delete after it : ");
+        scanf("%d", &node);
+
+        while (ptr->data != node)
+        {
+            ptr = ptr->next;
+        }
+
+        if (ptr->next == NULL)
+            printf("\nThere is no node to delete after a given node!!!\n");
+        else if (ptr->next->data == tail->data)
+            delete_end();
+        else
+        {
+            temp = ptr->next;
+            ptr->next = temp->next;
+            temp->next->pre = ptr;
+            free(temp);
         }
     }
 }
