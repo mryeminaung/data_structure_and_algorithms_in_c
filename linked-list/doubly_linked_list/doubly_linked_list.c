@@ -495,6 +495,45 @@ void delete_after()
     }
 }
 
+void delete_given_node()
+{
+    if (head == NULL)
+    {
+        printf("\nLinked List is empty!\n");
+        return;
+    }
+    else
+    {
+        struct node *ptr;
+        ptr = head;
+        int node;
+
+        printf("\nEnter a node to delete it : ");
+        scanf("%d", &node);
+
+        if (ptr->next == NULL)
+        {
+            head = NULL;
+            tail = NULL;
+            free(ptr);
+        }
+        else if (head->data == node)
+            delete_start();
+        else if (tail->data == node)
+            delete_end();
+        else
+        {
+            while (ptr->data != node)
+            {
+                ptr = ptr->next;
+            }
+            ptr->next->pre = ptr->pre;
+            ptr->pre->next = ptr->next;
+            free(ptr);
+        }
+    }
+}
+
 void delete_entire_list()
 {
     if (head == NULL)
