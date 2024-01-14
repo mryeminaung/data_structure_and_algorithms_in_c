@@ -316,21 +316,33 @@ void insert_before()
 
         printf("\nEnter a node to insert before it : ");
         scanf("%d", &node);
-        printf("\nEnter the data : ");
-        scanf("%d", &num);
 
-        newNode = (struct node *)malloc(sizeof(struct node));
-
-        while (ptr->data != node)
+        if (ptr->data == node)
         {
-            ptr = ptr->next;
+            add_start();
         }
+        else
+        {
+            while (ptr->data != node)
+            {
+                ptr = ptr->next;
+                if (ptr->next == NULL)
+                {
+                    printf("\n%d is not in the list!!!\n", node);
+                    return;
+                }
+            }
 
-        newNode->data = num;
-        newNode->next = ptr;
-        newNode->pre = ptr->pre;
-        ptr->pre->next = newNode;
-        ptr->pre = newNode;
+            printf("\nEnter the data : ");
+            scanf("%d", &num);
+            newNode = (struct node *)malloc(sizeof(struct node));
+
+            newNode->data = num;
+            newNode->next = ptr;
+            newNode->pre = ptr->pre;
+            ptr->pre->next = newNode;
+            ptr->pre = newNode;
+        }
     }
 }
 
@@ -349,21 +361,32 @@ void insert_after()
 
         printf("\nEnter a node to insert after it : ");
         scanf("%d", &node);
-        printf("\nEnter the data : ");
-        scanf("%d", &num);
 
-        newNode = (struct node *)malloc(sizeof(struct node));
-
-        while (ptr->data != node)
+        if (tail->data == node)
+            add_end();
+        else
         {
-            ptr = ptr->next;
-        }
+            while (ptr->data != node)
+            {
+                ptr = ptr->next;
+                if (ptr->next == NULL)
+                {
+                    printf("\n%d is not in the list!!!\n", node);
+                    return;
+                }
+            }
 
-        newNode->data = num;
-        newNode->next = ptr->next;
-        newNode->pre = ptr;
-        ptr->next = newNode;
-        newNode->next->pre = newNode;
+            printf("\nEnter the data : ");
+            scanf("%d", &num);
+
+            newNode = (struct node *)malloc(sizeof(struct node));
+
+            newNode->data = num;
+            newNode->next = ptr->next;
+            newNode->pre = ptr;
+            ptr->next = newNode;
+            newNode->next->pre = newNode;
+        }
     }
 }
 
