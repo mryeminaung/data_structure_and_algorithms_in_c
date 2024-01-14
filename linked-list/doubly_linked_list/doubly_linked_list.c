@@ -465,6 +465,11 @@ void delete_before()
         while (ptr->data != node)
         {
             ptr = ptr->next;
+            if (ptr->next == NULL)
+            {
+                printf("\n%d is not in the list!!!\n", node);
+                return;
+            }
         }
 
         if (ptr->data == head->data)
@@ -502,6 +507,11 @@ void delete_after()
         while (ptr->data != node)
         {
             ptr = ptr->next;
+            if (ptr->next == NULL)
+            {
+                printf("\n%d is not in the list!!!\n", node);
+                return;
+            }
         }
 
         if (ptr->next == NULL)
@@ -549,6 +559,11 @@ void delete_given_node()
             while (ptr->data != node)
             {
                 ptr = ptr->next;
+                if (ptr->next == NULL)
+                {
+                    printf("\n%d is not in the list!!!\n", node);
+                    return;
+                }
             }
             ptr->next->pre = ptr->pre;
             ptr->pre->next = ptr->next;
