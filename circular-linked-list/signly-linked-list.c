@@ -200,6 +200,21 @@ void delete_start()
     }
     else
     {
+        struct Node *ptr;
+        ptr = head;
+
+        if (ptr->next == head)
+        {
+            free(ptr);
+            head = NULL;
+            tail = NULL;
+        }
+        else
+        {
+            head = ptr->next;
+            tail->next = ptr->next;
+            free(ptr);
+        }
     }
 }
 
@@ -212,6 +227,28 @@ void delete_end()
     }
     else
     {
+        struct Node *ptr, *preptr;
+        ptr = head;
+        preptr = ptr;
+
+        if (ptr->next == head)
+        {
+            free(ptr);
+            head = NULL;
+            tail = NULL;
+        }
+        else
+        {
+            while (ptr->next != head)
+            {
+                preptr = ptr;
+                ptr = ptr->next;
+            }
+            preptr->next = ptr->next;
+            tail = preptr;
+            ptr->next = NULL;
+            free(ptr);
+        }
     }
 }
 
