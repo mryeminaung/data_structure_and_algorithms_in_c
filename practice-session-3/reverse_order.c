@@ -58,7 +58,7 @@ void menu()
     printf("\n*****MENU OPTION*****\n");
     printf("1. Create a list\n");
     printf("2. Display the list\n");
-    printf("3. Display the listin reverse order\n");
+    printf("3. Display the list in reverse order\n");
     printf("4. EXIT\n");
 }
 
@@ -149,7 +149,7 @@ void reverse_order()
 
             while (ptr != NULL)
             {
-                printf("Data %d: %d\n", (temp), ptr->data);
+                printf("Node %d: %d\n", (temp), ptr->data);
                 ptr = ptr->pre;
                 temp -= 1;
             }

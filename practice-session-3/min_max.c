@@ -131,7 +131,7 @@ void min_max()
 
         while (ptr != NULL)
         {
-            if (ptr->data > max_node)
+            if (ptr->data >= max_node)
                 max_node = ptr->data;
             else if (ptr->data <= min_node)
                 min_node = ptr->data;
