@@ -140,8 +140,8 @@ void display_list()
         } while (ptr != tail->next);
 
         // printf("\n\nFirst Node : %p", head);
-        // printf("\nLast node : %d", tail->data);
-        // printf("\nLast node : %p", tail->next);
+        // printf("\nLast node : %p", tail);
+        // printf("\nLast node->next : %p", tail->next);
 
         printf("\n");
     }
@@ -156,6 +156,16 @@ void add_start()
     }
     else
     {
+        struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+        int num = 0;
+
+        printf("\nEnter the data : ");
+        scanf("%d", &num);
+
+        newNode->data = num;
+        newNode->next = head;
+        head = newNode;
+        tail->next = head;
     }
 }
 
@@ -168,6 +178,16 @@ void add_end()
     }
     else
     {
+        struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+        int num = 0;
+
+        printf("\nEnter the data : ");
+        scanf("%d", &num);
+
+        tail->next = newNode;
+        newNode->data = num;
+        newNode->next = head;
+        tail = newNode;
     }
 }
 
