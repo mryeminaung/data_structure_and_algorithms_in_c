@@ -206,7 +206,21 @@ void delete_entire_list()
     }
     else
     {
+        struct Node *ptr, *preptr;
+        ptr = head;
+        preptr = ptr;
+
+        do
+        {
+            preptr = ptr;
+            head = preptr;
+            free(preptr);
+            ptr = ptr->next;
+        } while (ptr != tail->next);
         
+        head = NULL;
+        tail = NULL;
+
         printf("\nEntire Circular DLL is deleted!\n");
     }
 }
