@@ -336,17 +336,17 @@ void delete_entire_list()
     }
     else
     {
-        struct node *ptr;
+        struct node *ptr, *temp;
         ptr = head;
 
         while (ptr != NULL)
         {
-            head = ptr->pre;
-            ptr = ptr->next;
+            printf("\nNode %d is deleted.", ptr->data);
+            temp = ptr->next;
             free(ptr);
+            ptr = temp;
         }
         head = NULL;
-        tail = NULL;
+        printf("\nEntire list is deleted!\n");
     }
-    printf("\nEntire list is deleted!\n");
 }

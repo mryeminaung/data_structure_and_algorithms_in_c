@@ -118,7 +118,7 @@ void create_list()
             tail = newNode;
         }
     }
-    printf("\n\nCircular Doubly Linked List Created\n\n");
+    printf("\nCircular Doubly Linked List Created\n");
 }
 
 void display_list()
@@ -206,21 +206,18 @@ void delete_entire_list()
     }
     else
     {
-        struct Node *ptr, *preptr;
+        struct Node *ptr, *temp;
         ptr = head;
-        preptr = ptr;
 
         do
         {
-            preptr = ptr;
-            head = preptr;
-            free(preptr);
-            ptr = ptr->next;
-        } while (ptr != tail->next);
-        
-        head = NULL;
-        tail = NULL;
+            temp = ptr->next;
+            printf("\nNode %d is deleted.", ptr->data);
+            free(ptr);
+            ptr = temp;
+        } while (ptr != head);
 
-        printf("\nEntire Circular DLL is deleted!\n");
+        head = NULL;
+        printf("\n\nEntire Circular DLL is deleted!\n");
     }
 }

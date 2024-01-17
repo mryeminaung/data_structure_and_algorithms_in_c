@@ -199,18 +199,17 @@ void delete_list()
     }
     else
     {
-        struct node *ptr, *preptr;
+        struct node *ptr, *temp;
         ptr = head;
-        preptr = ptr;
 
         while (ptr != NULL)
         {
-            preptr = ptr;
-            head = preptr;
-            ptr = ptr->next;
-            free(preptr);
+            temp = ptr->next;
+            printf("\nNode %d is deleted.", ptr->data);
+            free(ptr);
+            ptr = temp;
         }
         head = NULL;
-        printf("\nLinked List is deleted!\n");
+        printf("\n\nEntire Singly Linked List is deleted!\n");
     }
 }

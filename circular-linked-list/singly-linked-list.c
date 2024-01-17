@@ -116,7 +116,7 @@ void create_list()
             tail = newNode;
         }
     }
-    printf("\n\nLINKED LIST CREATED\n\n");
+    printf("\nCircular Singly Linked List Created\n");
 }
 
 void display_list()
@@ -130,7 +130,7 @@ void display_list()
     {
         struct Node *ptr = head;
 
-        printf("\nLinked List : ");
+        printf("\nCircular SLL : ");
         do
         {
             printf("%d", ptr->data);
@@ -261,20 +261,19 @@ void delete_entire_list()
     }
     else
     {
-        struct Node *ptr, *preptr;
+        struct Node *ptr, *temp;
         ptr = head;
-        preptr = ptr;
 
-        while (ptr != tail->next)
+        do
         {
-            preptr = ptr;
-            head = preptr;
-            // tail->next = head;
-            ptr = ptr->next;
-            free(preptr);
-        }
+            temp = ptr->next;
+            printf("\nNode %d is deleted.", ptr->data);
+            free(ptr);
+            ptr = temp;
+        } while (ptr != head);
+
         head = NULL;
-        tail = NULL;
-        printf("\nEntire linked list is deleted!\n");
+
+        printf("\n\nEntire Circular SLL is deleted!\n");
     }
 }
