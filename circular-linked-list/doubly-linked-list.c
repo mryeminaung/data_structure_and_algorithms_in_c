@@ -212,6 +212,14 @@ void delete_start()
     }
     else
     {
+        struct Node *ptr, *temp;
+        ptr = head;
+
+        temp = ptr->next;
+        temp->prev = ptr->prev;
+        head = temp;
+        tail->next = head;
+        free(ptr);
     }
 }
 
@@ -224,6 +232,14 @@ void delete_end()
     }
     else
     {
+        struct Node *ptr, *temp;
+        ptr = tail;
+
+        temp = ptr->prev;
+        temp->next = head;
+        tail = temp;
+        head->prev = tail;
+        free(ptr);
     }
 }
 
