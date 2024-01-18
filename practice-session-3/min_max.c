@@ -9,6 +9,7 @@ void min_max();
 
 struct node
 {
+    struct node *prev;
     int data;
     struct node *next;
 };
@@ -25,7 +26,7 @@ int main()
         {
             printf("\nEnter your option : ");
             scanf("%d", &option);
-        } while (!(option >= 1 && option <= 8));
+        } while (!(option >= 1 && option <= 4));
 
         switch (option)
         {
@@ -61,17 +62,18 @@ void menu()
 void create_list()
 {
     struct node *ptr, *newNode;
-    int num, node, count = 0;
+    int num, node;
 
     printf("\nInput the number of nodes : ");
     scanf("%d", &node);
 
-    while (count < node)
+    for (int count = 0; count < node; count++)
     {
         printf("\nInput data for node %d: ", count + 1);
         scanf("%d", &num);
 
         newNode = (struct node *)(malloc(sizeof(struct node)));
+        newNode->prev = NULL;
         newNode->data = num;
         newNode->next = NULL;
 
@@ -84,11 +86,11 @@ void create_list()
             {
                 ptr = ptr->next;
             }
+            newNode->prev = ptr;
             ptr->next = newNode;
         }
-        count += 1;
     }
-    printf("\n\nLINKED LIST CREATED\n\n");
+    printf("\nLINKED LIST CREATED\n");
 }
 
 void display_list()

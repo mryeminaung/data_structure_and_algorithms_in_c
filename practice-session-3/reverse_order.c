@@ -29,7 +29,7 @@ int main()
         {
             printf("\nEnter your option : ");
             scanf("%d", &option);
-        } while (!(option >= 1 && option <= 8));
+        } while (!(option >= 1 && option <= 4));
 
         switch (option)
         {
@@ -65,17 +65,18 @@ void menu()
 void create_list()
 {
     struct node *ptr, *newNode;
-    int num, node, count = 0;
+    int num, node;
 
     printf("\nInput the number of nodes : ");
     scanf("%d", &node);
 
-    while (count < node)
+    for (int count = 0; count < node; count++)
     {
         printf("\nInput data for node %d: ", count + 1);
         scanf("%d", &num);
 
         newNode = (struct node *)(malloc(sizeof(struct node)));
+        newNode->pre = NULL;
         newNode->data = num;
         newNode->next = NULL;
 
@@ -97,10 +98,9 @@ void create_list()
             ptr->next = newNode;
             tail = newNode;
         }
-        count += 1;
         node_count += 1;
     }
-    printf("\n\nLINKED LIST CREATED\n\n");
+    printf("\nLINKED LIST CREATED\n");
 }
 
 void display_list()
@@ -112,8 +112,7 @@ void display_list()
     }
     else
     {
-        struct node *ptr;
-        ptr = head;
+        struct node *ptr = head;
         int node = 0;
 
         printf("\nData entered in the list are : \n");
@@ -140,7 +139,7 @@ void reverse_order()
 
         if (head->next == NULL)
         {
-            printf("\nData 1 : %d\n", head->data);
+            printf("\nnode 1 : %d\n", head->data);
         }
         else
         {
@@ -149,11 +148,10 @@ void reverse_order()
 
             while (ptr != NULL)
             {
-                printf("Node %d: %d\n", (temp), ptr->data);
+                printf("node %d : %d\n", (temp), ptr->data);
                 ptr = ptr->pre;
                 temp -= 1;
             }
-            printf("\n");
         }
     }
 }
