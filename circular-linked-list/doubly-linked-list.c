@@ -103,7 +103,7 @@ void create_list()
             head = newNode;
             tail = newNode;
             newNode->prev = head;
-            newNode->next = head;
+            newNode->next = tail;
         }
         else
         {
@@ -116,6 +116,7 @@ void create_list()
             newNode->prev = ptr;
             newNode->next = head;
             tail = newNode;
+            head->prev = tail;
         }
     }
     printf("\nCircular Doubly Linked List Created\n");
@@ -137,13 +138,14 @@ void display_list()
         {
             printf("%d", ptr->data);
             if (ptr->next != head)
-                printf(" -> ");
+                printf(" <=> ");
             ptr = ptr->next;
         } while (ptr != tail->next);
 
-        // printf("\n\nHead Node pre : %p", head->prev);
-        // printf("\nLast node : %p", tail);
-        // printf("\nLast node->next : %p", tail->next);
+        printf("\n\nHead Node pre : %p", head->prev);
+        printf("\nHead Node : %p", head);
+        printf("\n\nLast node : %p", tail);
+        printf("\nLast node->next : %p", tail->next);
 
         printf("\n");
     }
@@ -158,6 +160,20 @@ void add_start()
     }
     else
     {
+        struct Node *newNode;
+        int num = 0;
+
+        printf("\nEnter the data : ");
+        scanf("%d", &num);
+
+        newNode = (struct Node *)malloc(sizeof(struct Node));
+        newNode->data = num;
+
+        newNode->prev = tail;
+        newNode->next = head;
+        head->prev = newNode;
+        head = newNode;
+        tail->next = head;
     }
 }
 
@@ -170,6 +186,20 @@ void add_end()
     }
     else
     {
+        struct Node *newNode;
+        int num = 0;
+
+        printf("\nEnter the data : ");
+        scanf("%d", &num);
+
+        newNode = (struct Node *)malloc(sizeof(struct Node));
+        newNode->data = num;
+
+        newNode->prev = tail;
+        newNode->next = head;
+        tail->next = newNode;
+        tail = newNode;
+        head->prev = tail;
     }
 }
 
