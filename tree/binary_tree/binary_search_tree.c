@@ -11,6 +11,7 @@ struct node
 struct node *createNode(int value);
 struct node *insertNode(struct node *, int value);
 struct node *searchNode(struct node *, int value);
+int findLargestNode(struct node *);
 
 int main()
 {
@@ -24,10 +25,8 @@ int main()
     insertNode(root, 60);
     insertNode(root, 80);
 
-    if (searchNode(root, 80))
-        printf("\nFound!\n");
-    else
-        printf("\nNot Found!\n");
+    int largest = findLargestNode(root);
+    printf("The largest element in the BST is: %d\n", largest);
 
     return 0;
 }
@@ -64,4 +63,13 @@ struct node *searchNode(struct node *root, int value)
         return searchNode(root->left, value);
     else
         return searchNode(root->right, value);
+}
+
+int findLargestNode(struct node *root)
+{
+    while (root->right != NULL)
+    {
+        root = root->right;
+    }
+    return root->data;
 }
