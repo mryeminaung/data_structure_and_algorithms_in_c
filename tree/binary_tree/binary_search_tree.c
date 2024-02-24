@@ -12,6 +12,9 @@ struct node *createNode(int value);
 struct node *insertNode(struct node *, int value);
 struct node *searchNode(struct node *, int value);
 int findLargestNode(struct node *);
+void inorder(struct node *);
+void preorder(struct node *);
+void postorder(struct node *);
 
 int main()
 {
@@ -25,8 +28,17 @@ int main()
     insertNode(root, 60);
     insertNode(root, 80);
 
-    int largest = findLargestNode(root);
-    printf("The largest element in the BST is: %d\n", largest);
+    printf("Inorder traversal of the BST: \n");
+    inorder(root);
+    printf("\n\n");
+
+    printf("Preorder traversal of the BST: \n");
+    preorder(root);
+    printf("\n\n");
+
+    printf("Postorder traversal of the BST: \n");
+    postorder(root);
+    printf("\n\n");
 
     return 0;
 }
@@ -72,4 +84,34 @@ int findLargestNode(struct node *root)
         root = root->right;
     }
     return root->data;
+}
+
+void inorder(struct node *root)
+{
+    if (root == NULL)
+        return;
+
+    inorder(root->left);
+    printf("%d ", root->data);
+    inorder(root->right);
+}
+
+void preorder(struct node *root)
+{
+    if (root == NULL)
+        return;
+
+    printf("%d ", root->data);
+    preorder(root->left);
+    preorder(root->right);
+}
+
+void postorder(struct node *root)
+{
+    if (root == NULL)
+        return;
+
+    postorder(root->left);
+    postorder(root->right);
+    printf("%d ", root->data);
 }
