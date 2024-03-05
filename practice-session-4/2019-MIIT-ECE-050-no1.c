@@ -13,7 +13,6 @@ struct Node *createNode(int);
 struct Node *insert(struct Node *, int);
 void displayLeafNodes(struct Node *, int, int);
 void displayInternalNodes(struct Node *, int, int);
-void preorder(struct Node *root);
 
 int main()
 {
@@ -99,14 +98,4 @@ void displayInternalNodes(struct Node *root, int low, int high)
 
     displayInternalNodes(root->left, low, high);
     displayInternalNodes(root->right, low, high);
-}
-
-void preorder(struct Node *root)
-{
-    if (root == NULL)
-        return;
-
-    printf("%d ", root->data);
-    preorder(root->left);
-    preorder(root->right);
 }
